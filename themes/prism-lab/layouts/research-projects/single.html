@@ -1,0 +1,254 @@
+{{ define "main" }}
+  {{- $p := . -}}
+  {{- $acronym := $p.Params.acronym -}}
+  {{- $initials := "" -}}
+  {{- if not $acronym -}}
+    {{- $words := split $p.Title " " -}}
+    {{- range first 3 $words -}}{{- $initials = printf "%s%s" $initials (substr . 0 1) -}}{{- end -}}
+  {{- end -}}
+
+  <article class="project-page">
+    <a class="back-link" href="{{ "/research-projects/" | relLangURL }}">← All research projects</a>
+
+    <header class="project-hero">
+      <div class="project-hero-top">
+        <div class="project-hero-icon" aria-hidden="true">
+          {{- with $p.Params.icon -}}
+            <img src="{{ . | relURL }}" alt="">
+          {{- else -}}
+            <span class="project-hero-mark">{{ $acronym | default $initials }}</span>
+          {{- end -}}
+        </div>
+        <div class="project-hero-identity">
+          {{- with $p.Params.status -}}
+            <span class="project-status project-status-{{ . | lower }}">{{ . | humanize }}</span>
+          {{- end -}}
+          {{- with $acronym }}<div class="project-acronym">{{ . }}</div>{{- end }}
+          <h1 class="project-title">{{ $p.Title }}</h1>
+          {{- with $p.Params.summary }}<p class="project-summary">{{ . }}</p>{{- end }}
+        </div>
+      </div>
+
+      {{- /* Action buttons for the external URLs. */ -}}
+      {{- $hasActions := or $p.Params.website $p.Params.cordis $p.Params.linkedin $p.Params.twitter (gt (len $p.Params.github) 0) -}}
+      {{- if $hasActions }}
+        <div class="project-actions">
+          {{- with $p.Params.website }}
+            <a class="btn btn-primary" href="{{ . }}" rel="noopener">Project website</a>
+          {{- end }}
+          {{- range $p.Params.github }}
+            <a class="btn btn-ghost" href="{{ . }}" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          {{- end }}
+          {{- with $p.Params.cordis }}
+            <a class="btn btn-ghost" href="{{ . }}" rel="noopener">CORDIS</a>
+          {{- end }}
+          {{- with $p.Params.linkedin }}
+            <a class="btn btn-ghost" href="{{ . }}" rel="noopener">LinkedIn</a>
+          {{- end }}
+          {{- with $p.Params.twitter }}
+            <a class="btn btn-ghost" href="{{ . }}" rel="noopener">Twitter</a>
+          {{- end }}
+        </div>
+      {{- end }}
+    </header>
+
+    {{- with $p.Params.cover }}
+      <figure class="project-cover"><img src="{{ . | relURL }}" alt=""></figure>
+    {{- end }}
+
+    <div class="project-body">
+      <div class="project-main">
+        {{- with $p.Content }}
+          <div class="prose">{{ . }}</div>
+        {{- end }}
+
+        {{- /* People involved — render avatars using the team-card partial. */ -}}
+        {{- with $p.Params.people }}
+          {{- $slugs := . -}}
+          {{- $teamAll := where site.RegularPages "Section" "team" -}}
+          {{- $members := slice -}}
+          {{- range $s := $slugs -}}
+            {{- range $teamAll -}}
+              {{- if eq .Params.slug $s -}}
+                {{- $members = $members | append . -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+          {{- with $members }}
+            <section class="project-section">
+              <h2 class="project-section-title">People involved</h2>
+              <div class="team-grid">
+                {{ range . }}
+                  {{ partial "team-card.html" . }}
+                {{ end }}
+              </div>
+            </section>
+          {{- end }}
+        {{- end }}
+
+        {{- /* Partners — logos + links. */ -}}
+        {{- with $p.Params.partners }}
+          <section class="project-section">
+            <h2 class="project-section-title">Partners</h2>
+            <div class="partner-grid">
+              {{ range . }}
+                {{- $link := .url -}}
+                {{- if $link -}}
+                  <a class="partner-tile" href="{{ $link }}" rel="noopener" title="{{ .name }}{{ with .role }} — {{ . }}{{ end }}">
+                {{- else -}}
+                  <div class="partner-tile">
+                {{- end }}
+                  <div class="partner-logo">
+                    {{- with .logo -}}
+                      <img src="{{ . | relURL }}" alt="{{ $.name }}">
+                    {{- else -}}
+                      <span class="partner-mark">{{ substr .name 0 2 }}</span>
+                    {{- end -}}
+                  </div>
+                  <div class="partner-meta">
+                    <span class="partner-name">{{ .name }}</span>
+                    {{- with .country }}<span class="partner-country">{{ . }}</span>{{- end }}
+                    {{- with .role }}<span class="partner-role">{{ . }}</span>{{- end }}
+                  </div>
+                {{- if $link -}}
+                  </a>
+                {{- else -}}
+                  </div>
+                {{- end }}
+              {{ end }}
+            </div>
+          </section>
+        {{- end }}
+
+        {{- /* Related publications: either an explicit list of paper IDs, or any
+               paper in papers.csv whose `projects` column references this slug.
+               For now we only honour the explicit list from front-matter. */ -}}
+        {{- with $p.Params.publications }}
+          {{- $wanted := . -}}
+          {{- $rows := getCSV "," "data/papers.csv" -}}
+          {{- $teamSlugs := slice -}}
+          {{- range where site.RegularPages "Section" "team" -}}
+            {{- $teamSlugs = $teamSlugs | append .Params.slug -}}
+          {{- end -}}
+          {{- $papers := slice -}}
+          {{- range after 1 $rows -}}
+            {{- if in $wanted (index . 0) -}}
+              {{- $papers = $papers | append (dict
+                "id"       (index . 0)
+                "title"    (index . 1)
+                "authors"  (split (index . 2) "|")
+                "year"     (index . 3)
+                "venue"    (index . 4)
+                "type"     (index . 5)
+                "doi"      (index . 6)
+                "url"      (index . 7)
+                "featured" (eq (index . 9) "1")
+              ) -}}
+            {{- end -}}
+          {{- end -}}
+          {{- with $papers }}
+            {{- $sorted := sort . "year" "desc" -}}
+            <section class="project-section">
+              <h2 class="project-section-title">Publications</h2>
+              <ol class="paper-list">
+                {{- range $sorted }}
+                  {{- $href := cond (ne .doi "") .doi .url -}}
+                  <li class="paper-item{{ if .featured }} paper-featured{{ end }}">
+                    <header class="paper-head">
+                      <span class="paper-year">{{ .year }}</span>
+                      {{- with .type }}<span class="paper-type">{{ . }}</span>{{- end }}
+                    </header>
+                    <p class="paper-title">
+                      {{ if $href }}<a href="{{ $href }}" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
+                    </p>
+                    <p class="paper-authors">
+                      {{- range $i, $a := .authors -}}
+                        {{- if $i }}<span class="paper-sep">, </span>{{ end -}}
+                        {{- if hasPrefix $a "ext:" -}}
+                          <span class="author-ext">{{ substr $a 4 }}</span>
+                        {{- else if in $teamSlugs $a -}}
+                          <a class="author-team" href="{{ printf "/team/%s/" $a | relLangURL }}">{{ replace $a "-" " " | title }}</a>
+                        {{- else -}}
+                          <span class="author-unknown">{{ replace $a "-" " " | title }}</span>
+                        {{- end -}}
+                      {{- end -}}
+                    </p>
+                    {{- with .venue }}<p class="paper-venue">{{ . }}</p>{{- end }}
+                  </li>
+                {{- end }}
+              </ol>
+            </section>
+          {{- end }}
+        {{- end }}
+      </div>
+
+      {{- /* Sidebar: admin + research-area chips + tags. */ -}}
+      <aside class="project-aside">
+        <div class="project-info">
+          {{- with $p.Params.start }}
+            <dl class="info-row">
+              <dt>Period</dt>
+              <dd>{{ . }}{{ with $p.Params.end }} – {{ . }}{{ else }} – present{{ end }}</dd>
+            </dl>
+          {{- end }}
+          {{- with $p.Params.funder }}
+            <dl class="info-row"><dt>Funder</dt><dd>{{ . }}</dd></dl>
+          {{- end }}
+          {{- with $p.Params.programme }}
+            <dl class="info-row"><dt>Programme</dt><dd>{{ . }}</dd></dl>
+          {{- end }}
+          {{- with $p.Params.grant_number }}
+            <dl class="info-row"><dt>Grant</dt><dd>{{ . }}</dd></dl>
+          {{- end }}
+          {{- with $p.Params.budget }}
+            <dl class="info-row"><dt>Budget</dt><dd>{{ . }}</dd></dl>
+          {{- end }}
+          {{- with $p.Params.role }}
+            <dl class="info-row"><dt>Our role</dt><dd>{{ . }}</dd></dl>
+          {{- end }}
+          {{- with $p.Params.pi }}
+            {{- $piSlug := . -}}
+            {{- range where site.RegularPages "Section" "team" -}}
+              {{- if eq .Params.slug $piSlug }}
+                <dl class="info-row">
+                  <dt>Principal investigator</dt>
+                  <dd><a href="{{ .RelPermalink }}">{{ .Title }}</a></dd>
+                </dl>
+              {{- end }}
+            {{- end }}
+          {{- end }}
+        </div>
+
+        {{- with $p.Params.research_areas }}
+          {{- $slugs := . -}}
+          {{- $areaPages := where site.RegularPages "Section" "research-areas" -}}
+          <div class="project-info">
+            <div class="info-title">Research areas</div>
+            <div class="chip-row">
+              {{- range $slugs -}}
+                {{- $slug := . -}}
+                {{- range $areaPages -}}
+                  {{- if eq .Params.slug $slug -}}
+                    <a class="chip chip-area" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                  {{- end -}}
+                {{- end -}}
+              {{- end -}}
+            </div>
+          </div>
+        {{- end }}
+
+        {{- with $p.Params.tags }}
+          <div class="project-info">
+            <div class="info-title">Topics</div>
+            <div class="chip-row">
+              {{ range . }}<span class="chip">{{ . }}</span>{{ end }}
+            </div>
+          </div>
+        {{- end }}
+      </aside>
+    </div>
+  </article>
+{{ end }}

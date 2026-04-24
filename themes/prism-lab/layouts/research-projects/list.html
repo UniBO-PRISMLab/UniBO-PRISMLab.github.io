@@ -1,0 +1,47 @@
+{{ define "main" }}
+  <section class="section">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+    </header>
+
+    {{ with .Content }}<div class="page-content prose">{{ . }}</div>{{ end }}
+
+    {{- $all := .Pages -}}
+    {{- /* Render one group per status in canonical order. */ -}}
+    {{- range slice "active" "upcoming" "completed" }}
+      {{- $status := . -}}
+      {{- $group := where $all "Params.status" $status -}}
+      {{- with $group.ByWeight }}
+        <div class="project-group">
+          <h2 class="project-group-title">
+            <span>{{ $status | humanize }}</span>
+            <span class="team-count">{{ len . }}</span>
+          </h2>
+          <div class="project-grid">
+            {{ range . }}
+              {{ partial "project-card.html" . }}
+            {{ end }}
+          </div>
+        </div>
+      {{- end }}
+    {{- end -}}
+
+    {{- /* Also render anything without a recognised status so nothing is hidden. */ -}}
+    {{- $known := slice "active" "upcoming" "completed" -}}
+    {{- $other := where $all "Params.status" "not in" $known -}}
+    {{- with $other.ByWeight }}
+      <div class="project-group">
+        <h2 class="project-group-title">
+          <span>Other</span>
+          <span class="team-count">{{ len . }}</span>
+        </h2>
+        <div class="project-grid">
+          {{ range . }}
+            {{ partial "project-card.html" . }}
+          {{ end }}
+        </div>
+      </div>
+    {{- end }}
+  </section>
+{{ end }}

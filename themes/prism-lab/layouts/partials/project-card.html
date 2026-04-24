@@ -1,0 +1,35 @@
+{{- $p := . -}}
+{{- $acronym := $p.Params.acronym -}}
+{{- $initials := "" -}}
+{{- if not $acronym -}}
+  {{- $words := split $p.Title " " -}}
+  {{- range first 3 $words -}}
+    {{- $initials = printf "%s%s" $initials (substr . 0 1) -}}
+  {{- end -}}
+{{- end -}}
+
+<a class="project-card" href="{{ $p.RelPermalink }}">
+  <div class="project-card-icon" aria-hidden="true">
+    {{- with $p.Params.icon -}}
+      <img src="{{ . | relURL }}" alt="">
+    {{- else -}}
+      <span class="project-card-mark">{{ $acronym | default $initials }}</span>
+    {{- end -}}
+  </div>
+  <div class="project-card-body">
+    <header class="project-card-head">
+      {{- with $p.Params.status -}}
+        <span class="project-status project-status-{{ . | lower }}">{{ . | humanize }}</span>
+      {{- end -}}
+      {{- with $p.Params.start -}}
+        <span class="project-dates">
+          {{ . }}{{ with $p.Params.end }} – {{ . }}{{ end }}
+        </span>
+      {{- end -}}
+    </header>
+    {{- with $acronym }}<div class="project-card-acronym">{{ . }}</div>{{- end }}
+    <h3 class="project-card-title">{{ $p.Title }}</h3>
+    {{- with $p.Params.summary }}<p class="project-card-summary">{{ . }}</p>{{- end }}
+    {{- with $p.Params.funder }}<p class="project-card-funder">{{ . }}</p>{{- end }}
+  </div>
+</a>
