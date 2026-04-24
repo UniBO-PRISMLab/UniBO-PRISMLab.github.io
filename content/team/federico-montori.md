@@ -3,7 +3,7 @@ title = "Federico Montori"
 slug = "federico-montori"
 weight = 40
 
-role = "Postdoctoral Researcher"
+role = "Associate Professor"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "Mobile Crowdsensing",
@@ -12,17 +12,19 @@ research_interests = [
   "IoT Automation",
 ]
 
+photo = "/images/team/montori.jpg"
+orcid = ""
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 
-Federico Montori is a postdoctoral researcher (since May 2019) with the University of Bologna,
-Italy, where he also obtained his Ph.D. in Computer Science and Engineering the same year. He
-received the B.S. and the M.S. in Computer Science, both *summa cum laude*, from the University
-of Bologna in 2012 and 2015 respectively.
+Federico Montori is an Associate Professor with the University of Bologna, Italy, where he also
+obtained his Ph.D. in Computer Science and Engineering in 2019. He received the B.S. and the
+M.S. in Computer Science, both *summa cum laude*, from the University of Bologna in 2012 and
+2015 respectively.
 
 He has been a visiting researcher at Swinburne University of Technology, Australia, and Luleå
 Tekniska Universitet, Sweden. He participated in several EU projects and is now Work Package

@@ -1,9 +1,9 @@
 +++
-title = "Ivan Dimitry Ribeiro Zyrianoff"
-slug = "ivan-dimitry-ribeiro-zyrianoff"
+title = "Ivan Zyrianoff"
+slug = "ivan-zyrianoff"
 weight = 60
 
-role = "PhD Candidate"
+role = "Postdoctoral Researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "Service Computing",
@@ -11,10 +11,12 @@ research_interests = [
   "Fog Computing",
 ]
 
+photo = "/images/team/zyrianoff.jpg"
+orcid = ""
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 

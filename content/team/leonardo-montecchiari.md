@@ -3,7 +3,7 @@ title = "Leonardo Montecchiari"
 slug = "leonardo-montecchiari"
 weight = 80
 
-role = "PhD Candidate"
+role = "postdoctoral researcher"
 affiliation = "Structural and Environmental Health Monitoring (SEHM²) Program, University of Bologna"
 research_interests = [
   "Monitoring Systems",
@@ -12,10 +12,12 @@ research_interests = [
   "Edge Computing",
 ]
 
+photo = "/images/team/montecchiari.jpg"
+orcid = ""
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 

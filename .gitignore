@@ -13,3 +13,6 @@
 
 # Dependencies (if any)
 node_modules/
+
+# Raw asset bundles (photos already extracted into static/images/team/)
+team_images.zip

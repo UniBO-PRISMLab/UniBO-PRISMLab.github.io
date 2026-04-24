@@ -3,7 +3,7 @@ title = "Luca Sciullo"
 slug = "luca-sciullo"
 weight = 50
 
-role = "PhD Candidate"
+role = "postdoctoral researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "IoT Services",
@@ -13,10 +13,12 @@ research_interests = [
   "Wireless Sensor Networks",
 ]
 
+photo = "/images/team/sciullo.png"
+orcid = ""
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 

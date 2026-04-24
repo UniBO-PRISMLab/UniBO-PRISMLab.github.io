@@ -15,10 +15,12 @@ research_interests = [
   "Mobile Applications",
 ]
 
+photo = "/images/team/bononi.jpg"
+orcid = "0000-0002-3460-6452"
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 

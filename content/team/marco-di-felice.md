@@ -3,7 +3,7 @@ title = "Marco Di Felice"
 slug = "marco-di-felice"
 weight = 20
 
-role = "Associate Professor"
+role = "Full Professor"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 position = "Co-director, IoT Prism Lab"
 research_interests = [
@@ -17,15 +17,17 @@ research_interests = [
   "Indoor Localization",
 ]
 
+photo = "/images/team/difelice.jpg"
+orcid = "0000-0001-7496-7597"
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 
-Marco Di Felice is an Associate Professor of Computer Science with the University of Bologna,
-where he is the co-director of the PRISM IoT research laboratory. He received the Laurea (summa
+Marco Di Felice is a Full Professor of Computer Science with the University of Bologna,
+where he is the co-director of the IoT Prism research laboratory. He received the Laurea (summa
 cum laude) and Ph.D. degrees in computer science from the University of Bologna, in 2004 and
 2008, respectively.
 

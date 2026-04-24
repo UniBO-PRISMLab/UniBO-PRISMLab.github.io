@@ -1185,6 +1185,19 @@ main {
   text-decoration: none;
 }
 
+.member-links .orcid-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.member-links .orcid-link:hover { color: #A6CE39; border-color: #A6CE39; }
+.orcid-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
 .member-section { margin-bottom: var(--space-xl); }
 .member-section-title {
   font-family: var(--font-mono);

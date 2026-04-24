@@ -3,17 +3,19 @@ title = "Lorenzo Gigli"
 slug = "lorenzo-gigli"
 weight = 70
 
-role = "PhD Candidate"
+role = "postdoctoral researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "Service Architectures",
   "Web of Things",
 ]
 
+photo = "/images/team/gigli.jpg"
+orcid = ""
+
 [links]
   website = ""
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 

@@ -3,7 +3,7 @@ title = "Angelo Trotta"
 slug = "angelo-trotta"
 weight = 30
 
-role = "Junior Assistant Professor"
+role = "Tenure Track Professor"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "Unmanned Aerial Vehicles (UAV)",
@@ -13,10 +13,12 @@ research_interests = [
   "Internet of Things",
 ]
 
+photo = "/images/team/trotta.jpg"
+orcid = ""
+
 [links]
-  website = ""
+  website = "https://angelotrotta.com/en/"
   scholar = ""
-  orcid   = ""
   email   = ""
 +++
 
@@ -25,7 +27,7 @@ of Bologna, Italy, in 2017. He was a Visiting Researcher at the Heudiasyc Labora
 Universities, UTC, Compiègne, France, and with the Genesys Laboratory, Northeastern University,
 Boston, MA, USA.
 
-He is a Junior Assistant Professor at the Department of Computer Science and Engineering,
+He is a Tenure Track Professor at the Department of Computer Science and Engineering,
 University of Bologna. He is Co-Founder of *AI for People*, an international association whose
 aim is to use Artificial Intelligence technology for the social good.
 
