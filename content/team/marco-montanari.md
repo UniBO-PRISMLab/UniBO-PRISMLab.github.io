@@ -5,7 +5,12 @@ weight = 100
 
 role = "Research Fellow"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
-research_interests = []
+research_interests = [
+  "Digital Humanities",
+  "Digital Cartography",
+    "Service Architectures",
+
+]
 
 photo = ""
 orcid = "0000-0001-5026-6083"

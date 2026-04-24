@@ -1,9 +1,10 @@
 +++
 title = "Lorenzo Gigli"
 slug = "lorenzo-gigli"
-weight = 70
+weight = 230
 
-role = "postdoctoral researcher"
+role = "Collaborator"
+position = "Postdoctoral Researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "Service Architectures",

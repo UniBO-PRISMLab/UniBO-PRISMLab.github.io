@@ -1,9 +1,10 @@
 +++
 title = "Alexandre Heideker"
 slug = "alexandre-heideker"
-weight = 120
+weight = 210
 
-role = "Visiting Researcher"
+role = "Collaborator"
+position = "Postdoctoral Researcher"
 affiliation = "Federal University of ABC, Brazil"
 research_interests = [
   "Internet of Things",

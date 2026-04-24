@@ -1,9 +1,10 @@
 +++
 title = "Luca Sciullo"
 slug = "luca-sciullo"
-weight = 50
+weight = 220
 
-role = "postdoctoral researcher"
+role = "Collaborator"
+position = "Postdoctoral Researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [
   "IoT Services",

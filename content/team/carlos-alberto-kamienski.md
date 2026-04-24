@@ -1,9 +1,10 @@
 +++
 title = "Carlos Alberto Kamienski"
 slug = "carlos-alberto-kamienski"
-weight = 110
+weight = 200
 
-role = "Visiting Researcher"
+role = "Collaborator"
+position = "Full Professor"
 affiliation = "Federal University of ABC, Brazil"
 research_interests = [
   "Internet of Things",

@@ -13,7 +13,11 @@
   </div>
   <div class="team-info">
     <h3 class="team-name">{{ $p.Title }}</h3>
-    {{- with $p.Params.role }}<div class="team-role">{{ . }}</div>{{- end }}
+    {{- with $p.Params.position }}
+      <div class="team-role">{{ . }}</div>
+    {{- else -}}
+      {{- with $p.Params.role }}<div class="team-role">{{ . }}</div>{{- end }}
+    {{- end }}
     {{- with $p.Params.research_interests -}}
       <p class="team-interests">{{ delimit . " · " }}</p>
     {{- end -}}

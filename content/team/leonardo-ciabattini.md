@@ -3,7 +3,7 @@ title = "Leonardo Ciabattini"
 slug = "leonardo-ciabattini"
 weight = 130
 
-role = "Collaborator"
+role = "PhD Candidate"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = []
 
@@ -16,5 +16,5 @@ orcid = ""
   email   = ""
 +++
 
-Leonardo Ciabattini collaborates with the IoT Prism Lab at the Department of Computer Science
-and Engineering, University of Bologna.
+Leonardo Ciabattini is a Ph.D. candidate with the IoT Prism Lab at the Department of Computer
+Science and Engineering, University of Bologna.
