@@ -50,16 +50,16 @@
     </div>
   </section>
 
-  {{- $posts := where .Site.RegularPages "Section" "posts" -}}
-  {{- with (first 5 $posts) }}
-  <section class="section" aria-labelledby="news-head">
+  {{- $team := where .Site.RegularPages "Section" "team" -}}
+  {{- with (first 6 $team) }}
+  <section class="section" aria-labelledby="team-head">
     <div class="section-head">
-      <h2 class="section-title" id="news-head">Latest news</h2>
-      <a class="section-link" href="{{ "/news/" | relLangURL }}">All news</a>
+      <h2 class="section-title" id="team-head">The team</h2>
+      <a class="section-link" href="{{ "/team/" | relLangURL }}">All members</a>
     </div>
-    <div class="posts-list">
+    <div class="team-grid">
       {{ range . }}
-        {{ partial "post-card.html" . }}
+        {{ partial "team-card.html" . }}
       {{ end }}
     </div>
   </section>

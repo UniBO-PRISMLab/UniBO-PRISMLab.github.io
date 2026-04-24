@@ -1,0 +1,35 @@
+{{ define "main" }}
+  <section class="section">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+    </header>
+
+    {{ with .Content }}<div class="page-content prose">{{ . }}</div>{{ end }}
+
+    {{- /* Members are authored in role/seniority order via the `weight` front-matter field.
+           We iterate a canonical list of roles and render one group per role,
+           preserving intra-group order. New roles can be added to $order below. */ -}}
+    {{- $grouped := .Pages.GroupByParam "role" -}}
+    {{- $order := slice "Full Professor" "Associate Professor" "Assistant Professor" "Junior Assistant Professor" "Postdoctoral Researcher" "Research Fellow" "PhD Candidate" "Visiting Researcher" "Collaborator" -}}
+    {{- range $order }}
+      {{- $role := . -}}
+      {{- range $grouped -}}
+        {{- if eq .Key $role -}}
+          {{- $pages := .Pages.ByWeight -}}
+          <div class="team-group">
+            <h2 class="team-group-title">
+              <span>{{ .Key }}{{ if gt (len $pages) 1 }}s{{ end }}</span>
+              <span class="team-count">{{ len $pages }}</span>
+            </h2>
+            <div class="team-grid">
+              {{ range $pages }}
+                {{ partial "team-card.html" . }}
+              {{ end }}
+            </div>
+          </div>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </section>
+{{ end }}

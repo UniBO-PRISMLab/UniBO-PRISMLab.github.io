@@ -1,0 +1,21 @@
+{{- $p := . -}}
+{{- $parts := split $p.Title " " -}}
+{{- $first := substr (index $parts 0) 0 1 -}}
+{{- $last  := substr (index $parts (sub (len $parts) 1)) 0 1 -}}
+{{- $initials := printf "%s%s" $first $last -}}
+<a class="team-card" href="{{ $p.RelPermalink }}">
+  <div class="team-avatar" aria-hidden="true">
+    {{- with $p.Params.photo -}}
+      <img src="{{ . | relURL }}" alt="">
+    {{- else -}}
+      <span class="team-initials">{{ $initials }}</span>
+    {{- end -}}
+  </div>
+  <div class="team-info">
+    <h3 class="team-name">{{ $p.Title }}</h3>
+    {{- with $p.Params.role }}<div class="team-role">{{ . }}</div>{{- end }}
+    {{- with $p.Params.research_interests -}}
+      <p class="team-interests">{{ delimit . " · " }}</p>
+    {{- end -}}
+  </div>
+</a>

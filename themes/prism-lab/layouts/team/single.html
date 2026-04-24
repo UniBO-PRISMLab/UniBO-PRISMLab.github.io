@@ -1,0 +1,60 @@
+{{ define "main" }}
+  {{- $parts := split .Title " " -}}
+  {{- $first := substr (index $parts 0) 0 1 -}}
+  {{- $last  := substr (index $parts (sub (len $parts) 1)) 0 1 -}}
+  {{- $initials := printf "%s%s" $first $last -}}
+
+  <article class="member">
+    <a class="back-link" href="{{ "/team/" | relLangURL }}">← Back to team</a>
+
+    <header class="member-header">
+      <div class="member-avatar" aria-hidden="true">
+        {{- with .Params.photo -}}
+          <img src="{{ . | relURL }}" alt="">
+        {{- else -}}
+          <span class="team-initials">{{ $initials }}</span>
+        {{- end -}}
+      </div>
+      <div class="member-identity">
+        {{- with .Params.role }}<div class="member-role-tag">{{ . }}</div>{{- end }}
+        <h1 class="member-name">{{ .Title }}</h1>
+        {{- with .Params.position }}<p class="member-position">{{ . }}</p>{{- end }}
+        {{- with .Params.affiliation }}<p class="member-affiliation">{{ . }}</p>{{- end }}
+
+        {{- $l := .Params.links | default dict -}}
+        {{- $email    := index $l "email"    | default "" -}}
+        {{- $website  := index $l "website"  | default "" -}}
+        {{- $scholar  := index $l "scholar"  | default "" -}}
+        {{- $orcid    := index $l "orcid"    | default "" -}}
+        {{- $linkedin := index $l "linkedin" | default "" -}}
+        {{- $github   := index $l "github"   | default "" -}}
+        {{- if or $email $website $scholar $orcid $linkedin $github -}}
+          <ul class="member-links">
+            {{- if $email    }}<li><a href="mailto:{{ $email }}">Email</a></li>{{- end }}
+            {{- if $website  }}<li><a href="{{ $website }}" rel="noopener">Website</a></li>{{- end }}
+            {{- if $scholar  }}<li><a href="{{ $scholar }}" rel="noopener">Google Scholar</a></li>{{- end }}
+            {{- if $orcid    }}<li><a href="{{ $orcid }}" rel="noopener">ORCID</a></li>{{- end }}
+            {{- if $linkedin }}<li><a href="{{ $linkedin }}" rel="noopener">LinkedIn</a></li>{{- end }}
+            {{- if $github   }}<li><a href="{{ $github }}" rel="noopener">GitHub</a></li>{{- end }}
+          </ul>
+        {{- end -}}
+      </div>
+    </header>
+
+    {{- with .Params.research_interests }}
+      <section class="member-section">
+        <h2 class="member-section-title">Research interests</h2>
+        <ul class="interest-chips">
+          {{ range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      </section>
+    {{- end }}
+
+    {{- with .Content }}
+      <section class="member-section">
+        <h2 class="member-section-title">Short bio</h2>
+        <div class="prose">{{ . }}</div>
+      </section>
+    {{- end }}
+  </article>
+{{ end }}

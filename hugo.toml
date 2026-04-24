@@ -68,15 +68,3 @@ theme = "prism-lab"
   url = "/graduate-with-us/"
   identifier = "primary-graduate"
   weight = 30
-
-[[menu.primary]]
-  name = "News"
-  url = "/news/"
-  identifier = "primary-news"
-  weight = 40
-
-[[menu.primary]]
-  name = "Contact"
-  url = "/contact-form/"
-  identifier = "primary-contact"
-  weight = 50
