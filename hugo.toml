@@ -8,29 +8,29 @@ theme = "prism-lab"
 
 [params]
   description = "IoT Prism Laboratory — research on next-generation pervasive IoT systems at the University of Bologna. Ubiquitous sensing, edge intelligence and decentralised data management."
-  heroTitle = "Refracting data"
-  heroTitleAccent = "into insight."
-  heroSubtitle = "IoT Prism Laboratory — pervasive systems research at the University of Bologna. Ubiquitous sensing, decentralised data management and edge intelligence, from device to cloud continuum."
+  heroTitle = "Pervasive IoT systems,"
+  heroTitleAccent = "refracted into a spectrum of research."
+  heroSubtitle = "We work on the device-to-cloud continuum: edge intelligence, web-of-things interoperability, robotic sensing, blockchain trust and context-aware computing — from a single brief to applied projects with industry."
   feedLinks = true
 
 # ---------------------------------------------------------------------------
 # Primary navigation
 # ---------------------------------------------------------------------------
 [[menu.primary]]
-  name = "IoT-Prism Laboratory"
+  name = "Lab"
   url = "/iot-prism-lab/"
   identifier = "primary-lab"
   weight = 10
 
 [[menu.primary]]
-  name = "The Lab"
+  name = "About the lab"
   url = "/iot-prism-lab/"
   identifier = "primary-lab-intro"
   parent = "primary-lab"
   weight = 10
 
 [[menu.primary]]
-  name = "The Team"
+  name = "Team"
   url = "/team/"
   identifier = "primary-team"
   parent = "primary-lab"
@@ -43,23 +43,23 @@ theme = "prism-lab"
   weight = 20
 
 [[menu.primary]]
-  name = "Research Areas"
+  name = "Research areas"
   url = "/research-areas/"
   identifier = "primary-research-areas"
   parent = "primary-research"
   weight = 10
 
 [[menu.primary]]
-  name = "Publications"
-  url = "/publications/"
-  identifier = "primary-publications"
+  name = "Projects"
+  url = "/research-projects/"
+  identifier = "primary-projects"
   parent = "primary-research"
   weight = 20
 
 [[menu.primary]]
-  name = "Research Projects"
-  url = "/research-projects/"
-  identifier = "primary-projects"
+  name = "Publications"
+  url = "/publications/"
+  identifier = "primary-publications"
   parent = "primary-research"
   weight = 30
 
