@@ -16,8 +16,8 @@ grant_number = ""
 budget       = ""
 role         = "Partner"
 
-icon  = ""
-cover = ""
+icon  = "/images/projects/swamp.png"
+cover = "/images/projects/swamp.png"
 
 website = ""
 github  = []

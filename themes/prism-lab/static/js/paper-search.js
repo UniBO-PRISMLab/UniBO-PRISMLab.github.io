@@ -87,4 +87,14 @@
   if (search) search.addEventListener("input", writeState);
 
   readState();
+
+  // "/" focuses the search field, terminal-style.
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    var tag = (t && t.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || (t && t.isContentEditable)) return;
+    e.preventDefault();
+    if (search) { search.focus(); search.select(); }
+  });
 })();

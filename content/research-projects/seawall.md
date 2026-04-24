@@ -16,8 +16,8 @@ grant_number = ""
 budget       = ""
 role         = "Partner"
 
-icon  = ""
-cover = ""
+icon  = "/images/projects/seawall.png"
+cover = "/images/projects/seawall.png"
 
 website = "https://bi-rex.it/en/"
 github  = []

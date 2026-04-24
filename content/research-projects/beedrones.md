@@ -16,8 +16,8 @@ grant_number = ""
 budget       = ""
 role         = "Coordinator"
 
-icon  = ""
-cover = ""
+icon  = "/images/projects/beedrones.png"
+cover = "/images/projects/beedrones.png"
 
 website = ""
 github  = []

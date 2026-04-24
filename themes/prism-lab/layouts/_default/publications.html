@@ -47,8 +47,11 @@
     <div class="pub-toolbar" role="search">
       <label class="pub-field pub-field-search">
         <span class="pub-field-label">Search</span>
-        <input id="pub-search" type="search" autocomplete="off" spellcheck="false"
-               placeholder="Title, author, venue…" aria-label="Search publications">
+        <span class="pub-field-input-wrap">
+          <input id="pub-search" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Title, author, venue…" aria-label="Search publications">
+          <kbd class="pub-kbd" aria-hidden="true">/</kbd>
+        </span>
       </label>
 
       <label class="pub-field">

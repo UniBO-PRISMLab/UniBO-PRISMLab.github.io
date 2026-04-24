@@ -1,6 +1,7 @@
 {{ define "main" }}
   <article class="area-page">
     <a class="back-link" href="{{ "/research-areas/" | relLangURL }}">← All research areas</a>
+    {{ partial "path-crumb.html" . }}
 
     <header class="page-header">
       {{- with .Params.meta.tag }}<span class="area-tag area-tag-lg">{{ . }}</span>{{- end }}

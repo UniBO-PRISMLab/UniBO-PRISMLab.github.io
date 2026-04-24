@@ -1,0 +1,12 @@
+{{- /* Mono file-path style breadcrumb rendered above page titles.
+       Uses the page's RelPermalink so it stays in sync with URL structure. */ -}}
+{{- $path := trim .RelPermalink "/" -}}
+{{- if $path -}}
+<span class="path-crumb" aria-hidden="true">
+  <span class="path-crumb-root">~</span><span class="path-crumb-sep">/</span>{{- $parts := split $path "/" -}}
+  {{- range $i, $p := $parts -}}
+    {{- if $i -}}<span class="path-crumb-sep">/</span>{{- end -}}
+    <span class="path-crumb-part">{{ $p }}</span>
+  {{- end -}}
+</span>
+{{- end -}}

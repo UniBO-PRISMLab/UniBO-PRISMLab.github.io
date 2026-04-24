@@ -16,8 +16,8 @@ grant_number = ""
 budget       = ""
 role         = "Partner"
 
-icon  = ""
-cover = ""
+icon  = "/images/projects/arrowhead-tools.jpg"
+cover = "/images/projects/arrowhead-tools.jpg"
 
 website = "https://arrowhead.eu/arrowheadtools"
 github  = []

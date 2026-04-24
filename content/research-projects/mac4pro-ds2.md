@@ -17,8 +17,8 @@ grant_number = ""
 budget       = ""
 role         = "Partner"
 
-icon  = ""
-cover = ""
+icon  = "/images/projects/mac4pro.jpg"
+cover = "/images/projects/mac4pro.jpg"
 
 website = ""
 github  = []
