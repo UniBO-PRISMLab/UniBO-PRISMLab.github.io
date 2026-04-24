@@ -1,7 +1,5 @@
 +++
 title = "Federico Montori"
-date = "2023-03-21T19:04:29"
-lastmod = "2023-03-23T16:56:34"
 slug = "federico-montori"
 weight = 40
 

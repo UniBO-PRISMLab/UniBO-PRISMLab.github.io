@@ -1,7 +1,5 @@
 +++
 title = "Ivan Dimitry Ribeiro Zyrianoff"
-date = "2023-03-21T19:07:08"
-lastmod = "2023-03-23T16:57:41"
 slug = "ivan-dimitry-ribeiro-zyrianoff"
 weight = 60
 

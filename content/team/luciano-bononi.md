@@ -1,7 +1,5 @@
 +++
 title = "Luciano Bononi"
-date = "2023-03-21T19:01:29"
-lastmod = "2023-03-23T16:55:04"
 slug = "luciano-bononi"
 weight = 10
 

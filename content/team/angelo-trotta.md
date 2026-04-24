@@ -1,7 +1,5 @@
 +++
 title = "Angelo Trotta"
-date = "2023-03-21T15:41:54"
-lastmod = "2023-03-21T19:36:59"
 slug = "angelo-trotta"
 weight = 30
 
