@@ -1,0 +1,50 @@
+{{- /* Large animated prism used on the homepage hero. */ -}}
+<div class="prism-art" aria-hidden="true">
+  <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="prism-face" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0.45"/>
+        <stop offset="50%"  stop-color="#a78bfa" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#ff5faa" stop-opacity="0.45"/>
+      </linearGradient>
+      <linearGradient id="prism-edge" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#22d3ee"/>
+        <stop offset="50%"  stop-color="#a78bfa"/>
+        <stop offset="100%" stop-color="#ff5faa"/>
+      </linearGradient>
+      <filter id="soft-glow">
+        <feGaussianBlur stdDeviation="4"/>
+      </filter>
+    </defs>
+
+    <!-- orbital ring -->
+    <circle cx="190" cy="190" r="160"
+      fill="none" stroke="url(#prism-edge)" stroke-width="1" stroke-dasharray="3 8" opacity="0.35">
+      <animateTransform attributeName="transform" type="rotate"
+        from="0 190 190" to="360 190 190" dur="60s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- incoming white beam -->
+    <path d="M20 190 L120 190" stroke="#f1f5f9" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+    <circle cx="20" cy="190" r="3" fill="#f1f5f9"/>
+
+    <!-- prism body -->
+    <path d="M130 70 L260 190 L130 310 Z"
+          fill="url(#prism-face)"
+          stroke="url(#prism-edge)" stroke-width="2" stroke-linejoin="round"
+          filter="url(#soft-glow)"/>
+    <path d="M130 70 L260 190 L130 310 Z"
+          fill="none"
+          stroke="url(#prism-edge)" stroke-width="1.5" stroke-linejoin="round"/>
+
+    <!-- refracted rays (spectrum) -->
+    <g stroke-width="2.5" stroke-linecap="round">
+      <line x1="260" y1="190" x2="370" y2="120" stroke="#ff5faa"/>
+      <line x1="260" y1="190" x2="372" y2="150" stroke="#fbbf24"/>
+      <line x1="260" y1="190" x2="372" y2="180" stroke="#a78bfa"/>
+      <line x1="260" y1="190" x2="372" y2="210" stroke="#7c9aff"/>
+      <line x1="260" y1="190" x2="372" y2="240" stroke="#22d3ee"/>
+      <line x1="260" y1="190" x2="370" y2="270" stroke="#34d399"/>
+    </g>
+  </svg>
+</div>

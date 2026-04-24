@@ -1,0 +1,47 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="{{ "/" | relLangURL }}" class="brand" aria-label="{{ .Site.Title }} — home">
+        {{ partial "brand.html" . }}
+        <span>
+          {{ .Site.Title }}
+          <span class="brand-text-muted">University of Bologna</span>
+        </span>
+      </a>
+      <p>
+        {{- with .Site.Params.description -}}
+          {{ . }}
+        {{- else -}}
+          Research on next-generation pervasive IoT systems — ubiquitous sensing, edge intelligence
+          and decentralised data management — at the Department of Computer Science and Engineering,
+          University of Bologna.
+        {{- end -}}
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-col-title">Explore</div>
+      <ul>
+        <li><a href="{{ "/iot-prism-lab/" | relLangURL }}">The Lab</a></li>
+        <li><a href="{{ "/team/" | relLangURL }}">The Team</a></li>
+        <li><a href="{{ "/research-areas/" | relLangURL }}">Research</a></li>
+        <li><a href="{{ "/publications/" | relLangURL }}">Publications</a></li>
+        <li><a href="{{ "/news/" | relLangURL }}">News</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-col-title">Engage</div>
+      <ul>
+        <li><a href="{{ "/graduate-with-us/" | relLangURL }}">Graduate with us</a></li>
+        <li><a href="{{ "/research-projects/" | relLangURL }}">Research projects</a></li>
+        <li><a href="{{ "/contact-form/" | relLangURL }}">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© {{ now.Year }} {{ .Site.Title }}. All rights reserved.</span>
+    <span>Department of Computer Science and Engineering · University of Bologna</span>
+  </div>
+</footer>

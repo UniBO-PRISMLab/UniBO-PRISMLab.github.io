@@ -1,0 +1,67 @@
+{{ define "main" }}
+  {{- $heroTitle  := .Site.Params.heroTitle       | default "Refracting data" -}}
+  {{- $heroAccent := .Site.Params.heroTitleAccent | default "into insight." -}}
+  {{- $heroLead   := .Site.Params.heroSubtitle    | default "IoT Prism Laboratory — pervasive systems research at the University of Bologna." -}}
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="hero-eyebrow">Dept. of Computer Science and Engineering · UniBo</span>
+        <h1 class="hero-title" id="hero-title">
+          <span class="line-outline">{{ $heroTitle }}</span>
+          <span class="line-gradient">{{ $heroAccent }}</span>
+        </h1>
+        <p class="hero-subtitle">{{ $heroLead }}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="{{ "/research-areas/" | relLangURL }}">Explore research</a>
+          <a class="btn btn-ghost"   href="{{ "/team/" | relLangURL }}">Meet the team</a>
+        </div>
+      </div>
+      {{ partial "prism-visual.html" . }}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="research-head">
+    <div class="section-head">
+      <h2 class="section-title" id="research-head">Research focus</h2>
+      <a class="section-link" href="{{ "/research-areas/" | relLangURL }}">All areas</a>
+    </div>
+    <div class="card-grid">
+      <a class="feature-card" href="{{ "/research-areas/" | relLangURL }}">
+        <span class="feature-tag">// 01</span>
+        <h3>Pervasive IoT systems</h3>
+        <p>Ubiquitous sensing, autonomous connectivity and interoperability across heterogeneous devices.</p>
+      </a>
+      <a class="feature-card" href="{{ "/research-areas/" | relLangURL }}">
+        <span class="feature-tag">// 02</span>
+        <h3>Edge intelligence</h3>
+        <p>Adaptive, extreme-edge processing and learning for latency- and privacy-sensitive applications.</p>
+      </a>
+      <a class="feature-card" href="{{ "/research-areas/" | relLangURL }}">
+        <span class="feature-tag">// 03</span>
+        <h3>Decentralised data</h3>
+        <p>Trustworthy, decentralised data management across the device–edge–cloud continuum.</p>
+      </a>
+      <a class="feature-card" href="{{ "/research-projects/" | relLangURL }}">
+        <span class="feature-tag">// 04</span>
+        <h3>Applied projects</h3>
+        <p>Smart agriculture, industrial automation and structural monitoring in national and EU projects.</p>
+      </a>
+    </div>
+  </section>
+
+  {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+  {{- with (first 5 $posts) }}
+  <section class="section" aria-labelledby="news-head">
+    <div class="section-head">
+      <h2 class="section-title" id="news-head">Latest news</h2>
+      <a class="section-link" href="{{ "/news/" | relLangURL }}">All news</a>
+    </div>
+    <div class="posts-list">
+      {{ range . }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+  </section>
+  {{- end }}
+{{ end }}

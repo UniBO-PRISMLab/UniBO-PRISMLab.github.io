@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <section class="section">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+    </header>
+
+    {{ with .Content }}
+      <div class="page-content prose">{{ . }}</div>
+    {{ end }}
+
+    {{- with .Pages }}
+      <div class="posts-list" style="margin-top: var(--space-xl);">
+        {{ range . }}
+          {{ partial "post-card.html" . }}
+        {{ end }}
+      </div>
+    {{- end }}
+  </section>
+{{ end }}

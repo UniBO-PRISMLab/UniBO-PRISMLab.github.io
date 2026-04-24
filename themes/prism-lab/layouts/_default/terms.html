@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <section class="section">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+    </header>
+
+    <div class="card-grid">
+      {{ $type := .Type }}
+      {{ range $name, $taxonomy := .Data.Terms }}
+        <a class="feature-card" href="{{ printf "/%s/%s/" $type ($name | urlize) | relLangURL }}">
+          <span class="feature-tag">#{{ $name }}</span>
+          <h3>{{ $name | title }}</h3>
+          <p>{{ len $taxonomy }} post{{ if ne (len $taxonomy) 1 }}s{{ end }}</p>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

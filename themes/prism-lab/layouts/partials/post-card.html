@@ -1,0 +1,32 @@
+{{- $p := . -}}
+<article class="post-card">
+  {{- with $p.Params.featured_image | default $p.Params.image -}}
+    <a class="post-image" href="{{ $p.RelPermalink }}" aria-hidden="true" tabindex="-1">
+      <img src="{{ . }}" alt="" loading="lazy">
+    </a>
+  {{- end }}
+  <header>
+    <h2 class="post-title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+    <div class="post-meta">
+      {{- with $p.Date }}
+        <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "02 Jan 2006" }}</time>
+      {{- end -}}
+      {{- with $p.Params.categories -}}
+        <span class="sep">·</span>
+        <span>{{ delimit . ", " }}</span>
+      {{- end -}}
+      {{- if $p.ReadingTime }}
+        <span class="sep">·</span>
+        <span>{{ $p.ReadingTime }} min read</span>
+      {{- end -}}
+    </div>
+  </header>
+  {{- with $p.Summary }}
+    <p class="post-excerpt">{{ . | plainify | truncate 220 }}</p>
+  {{- end }}
+  {{- with $p.Params.tags }}
+    <div class="post-tags">
+      {{ range . }}<a class="post-tag" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>{{ end }}
+    </div>
+  {{- end }}
+</article>

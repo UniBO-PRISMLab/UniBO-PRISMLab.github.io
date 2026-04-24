@@ -1,0 +1,46 @@
+{{- /* Renders the `primary` site menu (falls back to `main`), with one level of submenus.
+       Hugo 0.40 compatible. */ -}}
+{{- $ctx := . -}}
+{{- $menu := .Site.Menus.primary -}}
+{{- $menuName := "primary" -}}
+
+<ul class="nav-primary" role="menubar">
+  {{- if $menu -}}
+    {{- range $menu }}
+      {{- $hasChildren := .HasChildren -}}
+      <li class="nav-item{{ if $hasChildren }} has-submenu{{ end }}" role="none">
+        <a
+          href="{{ .URL | relLangURL }}"
+          class="nav-link{{ if $ctx.IsMenuCurrent "primary" . }} active{{ end }}"
+          {{ if $hasChildren }}aria-haspopup="true"{{ end }}
+          role="menuitem">
+          {{ .Name }}
+        </a>
+        {{- if $hasChildren }}
+          <ul class="submenu" role="menu">
+            {{- range .Children }}
+              <li class="nav-item" role="none">
+                <a
+                  href="{{ .URL | relLangURL }}"
+                  class="nav-link{{ if $ctx.IsMenuCurrent "primary" . }} active{{ end }}"
+                  role="menuitem">
+                  {{ .Name }}
+                </a>
+              </li>
+            {{- end }}
+          </ul>
+        {{- end }}
+      </li>
+    {{- end }}
+  {{- else -}}
+    {{- range .Site.Menus.main }}
+      <li class="nav-item" role="none">
+        <a href="{{ .URL | relLangURL }}"
+           class="nav-link{{ if $ctx.IsMenuCurrent "main" . }} active{{ end }}"
+           role="menuitem">
+          {{ .Name }}
+        </a>
+      </li>
+    {{- end -}}
+  {{- end }}
+</ul>

@@ -1,0 +1,38 @@
+{{ define "main" }}
+  <article class="single">
+    <header class="post-header">
+      {{- with .Params.categories -}}
+        <div class="post-meta" style="margin-bottom: var(--space-sm);">
+          {{ range . }}<span>{{ . }}</span>{{ end }}
+        </div>
+      {{- end }}
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="post-meta">
+        {{- with .Date }}
+          <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "02 Jan 2006" }}</time>
+        {{- end -}}
+        {{- if .ReadingTime }}
+          <span class="sep">·</span>
+          <span>{{ .ReadingTime }} min read</span>
+        {{- end -}}
+        {{- with .Lastmod }}
+          {{- if ne . $.Date }}
+            <span class="sep">·</span>
+            <span>Updated {{ .Format "02 Jan 2006" }}</span>
+          {{- end -}}
+        {{- end -}}
+      </div>
+      {{- with .Description }}<p class="page-description">{{ . }}</p>{{- end }}
+    </header>
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    {{- with .Params.tags }}
+      <footer class="post-tags" style="margin-top: var(--space-xl);">
+        {{ range . }}<a class="post-tag" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>{{ end }}
+      </footer>
+    {{- end }}
+  </article>
+{{ end }}

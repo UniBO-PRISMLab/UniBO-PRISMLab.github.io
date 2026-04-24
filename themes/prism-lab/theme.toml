@@ -1,0 +1,11 @@
+name = "Prism Lab"
+license = "MIT"
+description = "A glassmorphism Hugo theme for the IoT Prism Lab at the University of Bologna. Inspired by hugo-mana-theme."
+homepage = "https://iotprismlab.com/"
+tags = ["research", "lab", "dark", "light", "glass", "minimal", "academic"]
+features = ["research", "blog", "publications", "team"]
+min_version = "0.100.0"
+
+[author]
+  name = "IoT Prism Lab"
+  homepage = "https://iotprismlab.com/"

@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <section class="section" style="text-align: center; padding-top: var(--space-3xl);">
+    <div class="hero-eyebrow" style="margin: 0 auto var(--space-md);">error · 404</div>
+    <h1 class="hero-title">
+      <span class="line-outline">Signal lost.</span>
+      <span class="line-gradient">Page not found.</span>
+    </h1>
+    <p class="hero-subtitle" style="margin-top: var(--space-md);">
+      The page you're looking for seems to have refracted elsewhere.
+    </p>
+    <p style="margin-top: var(--space-lg);">
+      <a class="btn btn-primary" href="{{ "/" | relLangURL }}">Return home</a>
+    </p>
+  </section>
+{{ end }}

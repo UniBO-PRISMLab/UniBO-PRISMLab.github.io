@@ -1,0 +1,40 @@
+{{- $desc := .Description | default .Site.Params.description | default "IoT Prism Laboratory — research on next-generation pervasive IoT systems at the University of Bologna." -}}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#070b18" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbfaff"  media="(prefers-color-scheme: light)">
+
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title | default "Page" }} · {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ $desc }}">
+
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title"     content="{{ .Title | default .Site.Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type"      content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url"       content="{{ .Permalink }}">
+
+<link rel="canonical" href="{{ .Permalink }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+<script>
+  (function () {
+    try {
+      var k = localStorage.getItem("prism-theme");
+      if (!k) {
+        k = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", k);
+    } catch (e) {}
+  })();
+</script>
+
+{{- if .Site.Params.feedLinks -}}
+<link rel="alternate" type="application/rss+xml" href="{{ .Site.BaseURL }}index.xml" title="{{ .Site.Title }}">
+{{- end -}}

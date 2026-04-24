@@ -1,0 +1,18 @@
+{{- /* Animated prism-spectrum logo (inline SVG) */ -}}
+<svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="prism-spectrum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#22d3ee"/>
+      <stop offset="50%"  stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#ff5faa"/>
+    </linearGradient>
+  </defs>
+  <!-- incoming beam -->
+  <path d="M4 32 L20 32" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <!-- triangular prism -->
+  <path d="M22 10 L44 32 L22 54 Z" fill="url(#prism-spectrum)" opacity="0.22" stroke="url(#prism-spectrum)" stroke-width="1.5"/>
+  <!-- refracted rays -->
+  <path d="M44 32 L60 22" stroke="#22d3ee"  stroke-width="2" stroke-linecap="round"/>
+  <path d="M44 32 L62 32" stroke="#a78bfa"  stroke-width="2" stroke-linecap="round"/>
+  <path d="M44 32 L60 42" stroke="#ff5faa"  stroke-width="2" stroke-linecap="round"/>
+</svg>

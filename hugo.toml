@@ -1,0 +1,82 @@
+baseURL = "https://iotprismlab.com/"
+title = "IoT Prism Lab"
+languageCode = "en-us"
+theme = "prism-lab"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  description = "IoT Prism Laboratory — research on next-generation pervasive IoT systems at the University of Bologna. Ubiquitous sensing, edge intelligence and decentralised data management."
+  heroTitle = "Refracting data"
+  heroTitleAccent = "into insight."
+  heroSubtitle = "IoT Prism Laboratory — pervasive systems research at the University of Bologna. Ubiquitous sensing, decentralised data management and edge intelligence, from device to cloud continuum."
+  feedLinks = true
+
+# ---------------------------------------------------------------------------
+# Primary navigation
+# ---------------------------------------------------------------------------
+[[menu.primary]]
+  name = "IoT-Prism Laboratory"
+  url = "/iot-prism-lab/"
+  identifier = "primary-lab"
+  weight = 10
+
+[[menu.primary]]
+  name = "The Lab"
+  url = "/iot-prism-lab/"
+  identifier = "primary-lab-intro"
+  parent = "primary-lab"
+  weight = 10
+
+[[menu.primary]]
+  name = "The Team"
+  url = "/team/"
+  identifier = "primary-team"
+  parent = "primary-lab"
+  weight = 20
+
+[[menu.primary]]
+  name = "Research"
+  url = "/research-areas/"
+  identifier = "primary-research"
+  weight = 20
+
+[[menu.primary]]
+  name = "Research Areas"
+  url = "/research-areas/"
+  identifier = "primary-research-areas"
+  parent = "primary-research"
+  weight = 10
+
+[[menu.primary]]
+  name = "Publications"
+  url = "/publications/"
+  identifier = "primary-publications"
+  parent = "primary-research"
+  weight = 20
+
+[[menu.primary]]
+  name = "Research Projects"
+  url = "/research-projects/"
+  identifier = "primary-projects"
+  parent = "primary-research"
+  weight = 30
+
+[[menu.primary]]
+  name = "Graduate with us"
+  url = "/graduate-with-us/"
+  identifier = "primary-graduate"
+  weight = 30
+
+[[menu.primary]]
+  name = "News"
+  url = "/news/"
+  identifier = "primary-news"
+  weight = 40
+
+[[menu.primary]]
+  name = "Contact"
+  url = "/contact-form/"
+  identifier = "primary-contact"
+  weight = 50
