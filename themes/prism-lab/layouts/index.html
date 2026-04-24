@@ -21,34 +21,24 @@
     </div>
   </section>
 
+  {{- $areas := where site.RegularPages "Section" "research-areas" -}}
+  {{- with $areas.ByWeight }}
   <section class="section" aria-labelledby="research-head">
     <div class="section-head">
       <h2 class="section-title" id="research-head">Research focus</h2>
       <a class="section-link" href="{{ "/research-areas/" | relLangURL }}">All areas</a>
     </div>
     <div class="card-grid">
-      <a class="feature-card" href="{{ "/research-areas/" | relLangURL }}">
-        <span class="feature-tag">// 01</span>
-        <h3>Pervasive IoT systems</h3>
-        <p>Ubiquitous sensing, autonomous connectivity and interoperability across heterogeneous devices.</p>
-      </a>
-      <a class="feature-card" href="{{ "/research-areas/" | relLangURL }}">
-        <span class="feature-tag">// 02</span>
-        <h3>Edge intelligence</h3>
-        <p>Adaptive, extreme-edge processing and learning for latency- and privacy-sensitive applications.</p>
-      </a>
-      <a class="feature-card" href="{{ "/research-areas/" | relLangURL }}">
-        <span class="feature-tag">// 03</span>
-        <h3>Decentralised data</h3>
-        <p>Trustworthy, decentralised data management across the device–edge–cloud continuum.</p>
-      </a>
-      <a class="feature-card" href="{{ "/research-projects/" | relLangURL }}">
-        <span class="feature-tag">// 04</span>
-        <h3>Applied projects</h3>
-        <p>Smart agriculture, industrial automation and structural monitoring in national and EU projects.</p>
-      </a>
+      {{ range . }}
+        <a class="feature-card" href="{{ .RelPermalink }}">
+          {{- with .Params.meta.tag }}<span class="feature-tag">{{ . }}</span>{{- end }}
+          <h3>{{ .Title }}</h3>
+          {{- with .Params.summary }}<p>{{ . }}</p>{{- end }}
+        </a>
+      {{ end }}
     </div>
   </section>
+  {{- end }}
 
   {{- $team := where .Site.RegularPages "Section" "team" -}}
   {{- with (first 6 $team) }}

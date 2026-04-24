@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <article class="area-page">
+    <a class="back-link" href="{{ "/research-areas/" | relLangURL }}">← All research areas</a>
+
+    <header class="page-header">
+      {{- with .Params.meta.tag }}<span class="area-tag area-tag-lg">{{ . }}</span>{{- end }}
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{- with .Params.summary }}<p class="page-description">{{ . }}</p>{{- end }}
+    </header>
+
+    {{- with .Params.image }}
+      <figure class="area-hero"><img src="{{ . | relURL }}" alt=""></figure>
+    {{- end }}
+
+    <div class="prose area-prose">
+      {{ .Content }}
+    </div>
+
+    {{- partial "paper-list.html" (dict "filterKey" "area" "filterValue" .Params.slug "heading" "Selected publications" "empty" "No publications are linked to this area yet. Add rows to data/papers.csv with this area's slug.") }}
+  </article>
+{{ end }}

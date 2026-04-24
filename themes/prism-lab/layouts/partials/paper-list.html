@@ -1,0 +1,101 @@
+{{- /*
+  Render a filtered list of papers from data/papers.csv.
+  Ordering: featured rows first, then year descending.
+
+  Parameters (dict):
+    - filterKey   : "area" | "author"
+    - filterValue : slug to match against the authors/research_areas column
+    - heading     : section heading (default "Publications")
+    - empty       : fallback copy when no rows match
+
+  Column layout of papers.csv (keep in sync with data/README.md):
+    0: id              5: type
+    1: title           6: doi
+    2: authors         7: url
+    3: year            8: research_areas
+    4: venue           9: featured (0|1)
+*/ -}}
+
+{{- $rows := getCSV "," "data/papers.csv" -}}
+{{- $filterKey   := .filterKey -}}
+{{- $filterValue := .filterValue -}}
+{{- $heading     := .heading | default "Publications" -}}
+{{- $empty       := .empty   | default "No publications yet." -}}
+
+{{- /* Build a set of team-member slugs for author linking. */ -}}
+{{- $teamSlugs := slice -}}
+{{- range where site.RegularPages "Section" "team" -}}
+  {{- $teamSlugs = $teamSlugs | append .Params.slug -}}
+{{- end -}}
+
+{{- /* Map the CSV rows to dicts and filter in one pass. */ -}}
+{{- $matched := slice -}}
+{{- range after 1 $rows -}}
+  {{- $authors := split (index . 2) "|" -}}
+  {{- $areas   := split (index . 8) "|" -}}
+  {{- $hit := or
+    (and (eq $filterKey "area")   (in $areas   $filterValue))
+    (and (eq $filterKey "author") (in $authors $filterValue))
+  -}}
+  {{- if $hit -}}
+    {{- $matched = $matched | append (dict
+      "id"       (index . 0)
+      "title"    (index . 1)
+      "authors"  $authors
+      "year"     (index . 3)
+      "venue"    (index . 4)
+      "type"     (index . 5)
+      "doi"      (index . 6)
+      "url"      (index . 7)
+      "areas"    $areas
+      "featured" (eq (index . 9) "1")
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Sort: featured first, then year desc. Hugo's `sort` is stable, so we
+       sort by year desc first, then by featured desc, and the year order is
+       preserved within each featured group. */ -}}
+{{- $matched = sort $matched "year" "desc" -}}
+{{- $matched = sort $matched "featured" "desc" -}}
+
+<section class="paper-list-section">
+  {{- with $heading }}<h2 class="member-section-title">{{ . }}</h2>{{- end }}
+
+  {{- if eq (len $matched) 0 }}
+    <p class="paper-empty">{{ $empty }}</p>
+  {{- else }}
+    <ol class="paper-list">
+      {{- range $matched }}
+        {{- $href := cond (ne .doi "") .doi .url -}}
+        <li class="paper-item{{ if .featured }} paper-featured{{ end }}">
+          <header class="paper-head">
+            <span class="paper-year">{{ .year }}</span>
+            {{- with .type }}<span class="paper-type">{{ . }}</span>{{- end }}
+            {{- if .featured }}<span class="paper-badge">featured</span>{{- end }}
+          </header>
+          <p class="paper-title">
+            {{- if $href -}}
+              <a href="{{ $href }}" rel="noopener">{{ .title }}</a>
+            {{- else -}}
+              {{ .title }}
+            {{- end -}}
+          </p>
+          <p class="paper-authors">
+            {{- range $i, $a := .authors -}}
+              {{- if $i }}<span class="paper-sep">, </span>{{ end -}}
+              {{- if hasPrefix $a "ext:" -}}
+                <span class="author-ext">{{ substr $a 4 }}</span>
+              {{- else if in $teamSlugs $a -}}
+                <a class="author-team" href="{{ printf "/team/%s/" $a | relLangURL }}">{{ replace $a "-" " " | title }}</a>
+              {{- else -}}
+                <span class="author-unknown">{{ replace $a "-" " " | title }}</span>
+              {{- end -}}
+            {{- end -}}
+          </p>
+          {{- with .venue }}<p class="paper-venue">{{ . }}</p>{{- end }}
+        </li>
+      {{- end }}
+    </ol>
+  {{- end }}
+</section>

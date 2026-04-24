@@ -66,5 +66,13 @@
         <div class="prose">{{ . }}</div>
       </section>
     {{- end }}
+
+    <section class="member-section">
+      {{- partial "paper-list.html" (dict
+          "filterKey"   "author"
+          "filterValue" .Params.slug
+          "heading"     "Publications"
+          "empty"       "No publications are linked to this profile yet. Add rows to data/papers.csv using this slug.") }}
+    </section>
   </article>
 {{ end }}
