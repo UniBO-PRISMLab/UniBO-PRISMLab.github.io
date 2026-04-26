@@ -17,8 +17,9 @@ orcid = "0000-0001-5026-6083"
 
 [links]
   website = "https://www.ingmmo.com"
-  scholar = ""
+  scholar = "https://scholar.google.com/citations?user=ToAyrF8AAAAJ&hl=it&authuser=3"
   email   = "marco.montanari@gmail.com"
+  github  = "https://www.github.com/sirmmo"
 +++
 
 Marco Montanari is a Research Fellow at the PRISM Laboratory, Department of Computer Science and Engineering, University of Bologna. He received the Laurea in Computer Engineering from the University of Bologna in 2008. He is co-founder of OpenHistoryMap, an open infrastructure for historical and fantasy geographic data, and co-founder of GaiaWM, a world-state engine for narrative-coherent agent simulation. His research focuses on agent-based world simulation, LLM agents under partial observability, affordance modeling, and semantic interoperability across IoT systems and digital twins. His work bridges pervasive IoT, knowledge representation, and large language model agents.
