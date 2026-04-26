@@ -1,9 +1,9 @@
 +++
 title = "Luca Sciullo"
 slug = "luca-sciullo"
-weight = 220
+weight = 200
 
-role = "Collaborator"
+role = "PhD Graduate"
 position = "Postdoctoral Researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [

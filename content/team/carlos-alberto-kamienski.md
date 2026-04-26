@@ -1,9 +1,9 @@
 +++
 title = "Carlos Alberto Kamienski"
 slug = "carlos-alberto-kamienski"
-weight = 200
+weight = 180
 
-role = "Collaborator"
+role = "Visitor"
 position = "Full Professor"
 affiliation = "Federal University of ABC, Brazil"
 research_interests = [

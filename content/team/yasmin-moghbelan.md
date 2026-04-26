@@ -1,9 +1,9 @@
 +++
 title = "Yasmin Moghbelan"
 slug = "yasmin-moghbelan"
-weight = 90
+weight = 230
 
-role = "PhD Candidate"
+role = "Former Research Fellow"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = []
 
@@ -16,5 +16,5 @@ orcid = ""
   email   = ""
 +++
 
-Yasmin Moghbelan is a Ph.D. candidate with the IoT Prism Lab at the Department of Computer
+Yasmin Moghbelan was a research fellow with the IoT Prism Lab at the Department of Computer
 Science and Engineering, University of Bologna.

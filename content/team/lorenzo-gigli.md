@@ -1,9 +1,9 @@
 +++
 title = "Lorenzo Gigli"
 slug = "lorenzo-gigli"
-weight = 230
+weight = 210
 
-role = "Collaborator"
+role = "PhD Graduate"
 position = "Postdoctoral Researcher"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"
 research_interests = [

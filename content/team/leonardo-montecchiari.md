@@ -1,9 +1,9 @@
 +++
 title = "Leonardo Montecchiari"
 slug = "leonardo-montecchiari"
-weight = 240
+weight = 220
 
-role = "Collaborator"
+role = "PhD Graduate"
 position = "Postdoctoral Researcher"
 affiliation = "Structural and Environmental Health Monitoring (SEHM²) Program, University of Bologna"
 research_interests = [

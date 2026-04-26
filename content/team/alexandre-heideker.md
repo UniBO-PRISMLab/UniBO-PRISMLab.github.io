@@ -1,9 +1,9 @@
 +++
 title = "Alexandre Heideker"
 slug = "alexandre-heideker"
-weight = 210
+weight = 240
 
-role = "Collaborator"
+role = "Former Research Fellow"
 position = "Postdoctoral Researcher"
 affiliation = "Federal University of ABC, Brazil"
 research_interests = [
@@ -21,5 +21,5 @@ orcid = ""
   email   = ""
 +++
 
-Alexandre Heideker collaborates with the IoT Prism Lab on IoT platform research, with a focus on
-IoT architectures, edge computing and applied smart-agriculture use-cases.
+Alexandre Heideker was a research fellow with the IoT Prism Lab, working on IoT platform research
+with a focus on IoT architectures, edge computing and applied smart-agriculture use-cases.

@@ -1,7 +1,7 @@
 +++
 title = "Marco Di Felice"
 slug = "marco-di-felice"
-weight = 20
+weight = 10
 
 role = "Full Professor"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"

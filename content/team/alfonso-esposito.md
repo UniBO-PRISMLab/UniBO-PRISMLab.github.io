@@ -1,7 +1,7 @@
 +++
 title = "Alfonso Esposito"
 slug = "alfonso-esposito"
-weight = 140
+weight = 160
 
 role = "PhD Candidate"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"

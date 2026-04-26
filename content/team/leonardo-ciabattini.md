@@ -1,7 +1,7 @@
 +++
 title = "Leonardo Ciabattini"
 slug = "leonardo-ciabattini"
-weight = 130
+weight = 170
 
 role = "PhD Candidate"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"

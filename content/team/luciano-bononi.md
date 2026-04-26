@@ -1,7 +1,7 @@
 +++
 title = "Luciano Bononi"
 slug = "luciano-bononi"
-weight = 10
+weight = 20
 
 role = "Full Professor"
 affiliation = "Department of Computer Science and Engineering, University of Bologna"

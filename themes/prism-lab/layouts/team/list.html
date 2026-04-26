@@ -14,7 +14,7 @@
            Hugo 0.40 cannot reassign template variables, so we merge via `union` of
            two `where` filters (title-case and lowercase) rather than an accumulator. */ -}}
     {{- $ctx := . -}}
-    {{- $order := slice "Full Professor" "Associate Professor" "Assistant Professor" "Tenure Track Professor" "Junior Assistant Professor" "Postdoctoral Researcher" "Research Fellow" "PhD Candidate" "Visiting Researcher" "Collaborator" -}}
+    {{- $order := slice "Full Professor" "Associate Professor" "Assistant Professor" "Tenure Track Professor" "Junior Assistant Professor" "Postdoctoral Researcher" "Research Fellow" "PhD Candidate" "Visitor" "Visiting Researcher" "PhD Graduate" "Former Research Fellow" "Collaborator" -}}
     {{- range $order }}
       {{- $label := . -}}
       {{- $lower := lower . -}}
