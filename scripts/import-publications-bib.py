@@ -33,6 +33,126 @@ COLUMNS = [
     "type", "doi", "url", "research_areas", "featured",
 ]
 
+AREA_ORDER = [
+    "edge-computing",
+    "iot-interoperability",
+    "blockchain-iot",
+    "autonomous-robotic-iot",
+    "condition-monitoring",
+    "context-awareness",
+]
+
+AREA_KEYWORDS: dict[str, list[tuple[str, int]]] = {
+    "edge-computing": [
+        ("edge computing", 3),
+        ("extreme edge", 3),
+        ("edge-cloud continuum", 3),
+        ("edge cloud continuum", 3),
+        ("cloud-to-edge", 2),
+        ("cloud to edge", 2),
+        ("fog computing", 3),
+        ("split computing", 3),
+        ("model splitting", 2),
+        ("offloading", 2),
+        ("offload", 2),
+        ("webassembly", 3),
+        ("containerization", 2),
+        ("kubernetes", 2),
+        ("proactive caching", 3),
+        ("edge caching", 3),
+        ("low-latency", 1),
+    ],
+    "iot-interoperability": [
+        ("interoperability", 4),
+        ("web of things", 4),
+        ("w3c", 2),
+        ("digital twin", 3),
+        ("ontology", 3),
+        ("semantic", 2),
+        ("service composition", 3),
+        ("service-oriented", 2),
+        ("service oriented", 2),
+        ("open iot platform", 3),
+        ("iot platform", 2),
+        ("fiware", 3),
+        ("open api", 2),
+        ("mashup", 2),
+        ("mash-up", 2),
+        ("directory", 1),
+        ("toolchain", 1),
+        ("integration", 1),
+    ],
+    "blockchain-iot": [
+        ("blockchain", 5),
+        ("distributed ledger", 4),
+        ("dlt", 4),
+        ("oracle", 5),
+        ("smart contract", 4),
+        ("web3", 4),
+        ("dapp", 3),
+        ("consensus", 2),
+        ("multi-chain", 4),
+        ("cross-chain", 4),
+        ("zero-trust", 3),
+        ("anonym", 2),
+    ],
+    "autonomous-robotic-iot": [
+        ("uav", 4),
+        ("drone", 4),
+        ("aerial", 3),
+        ("swarm", 4),
+        ("robotic", 4),
+        ("robot", 3),
+        ("autonomous", 3),
+        ("vehicular", 3),
+        ("vanet", 4),
+        ("v2x", 3),
+        ("wireless mesh", 3),
+        ("cognitive radio", 3),
+        ("sidelink", 2),
+        ("search and rescue", 2),
+        ("satellite", 2),
+        ("ntn", 2),
+    ],
+    "condition-monitoring": [
+        ("structural health monitoring", 5),
+        ("condition monitoring", 5),
+        ("shm", 4),
+        ("prognostic", 3),
+        ("degradation", 3),
+        ("anomaly detection", 2),
+        ("vibration", 2),
+        ("insulation", 2),
+        ("crack detection", 3),
+        ("sensor-to-cloud", 2),
+        ("sensor to cloud", 2),
+        ("bridge monitoring", 3),
+        ("railway", 2),
+        ("train identification", 2),
+    ],
+    "context-awareness": [
+        ("human activity recognition", 5),
+        ("activity recognition", 4),
+        ("mobile crowdsensing", 5),
+        ("crowdsensing", 4),
+        ("context-aware", 4),
+        ("context aware", 4),
+        ("localization", 4),
+        ("location-aware", 4),
+        ("location aware", 4),
+        ("navigation", 3),
+        ("mobility", 2),
+        ("smartphone", 2),
+        ("keylogging", 3),
+        ("contact tracing", 3),
+        ("privacy", 2),
+        ("rehabilitation", 2),
+        ("e-health", 2),
+        ("smart city", 2),
+        ("tourism", 2),
+    ],
+}
+
 ENTRY_TYPE_MAP = {
     "article": "journal",
     "inproceedings": "conference",
@@ -268,6 +388,60 @@ def normalize_doi(doi: str) -> str:
     return f"https://doi.org/{doi}"
 
 
+def classify_research_areas(
+    title: str,
+    abstract: str,
+    venue: str,
+    entry_type: str,
+) -> str:
+    text = norm_ascii(" ".join([title, abstract, venue]))
+    haystack = f" {text} "
+    scores: dict[str, int] = {k: 0 for k in AREA_ORDER}
+
+    for area, pairs in AREA_KEYWORDS.items():
+        for kw, weight in pairs:
+            needle = norm_ascii(kw)
+            if needle and f" {needle} " in haystack:
+                scores[area] += weight
+
+    # IoT-centric text gently biases interoperability.
+    if " internet of things " in haystack or " iot " in haystack:
+        scores["iot-interoperability"] += 1
+
+    # Legacy networking/wireless work tends to map better to this area than to a generic fallback.
+    if any(
+        f" {k} " in haystack
+        for k in [
+            "wireless",
+            "mesh network",
+            "cognitive radio",
+            "spectrum",
+            "vehicular",
+            "vanet",
+            "ad hoc",
+        ]
+    ):
+        scores["autonomous-robotic-iot"] += 1
+
+    max_score = max(scores.values())
+    selected: list[str] = []
+    if max_score > 0:
+        for area in AREA_ORDER:
+            sc = scores[area]
+            if sc == 0:
+                continue
+            if sc == max_score or sc >= max(2, max_score - 2):
+                selected.append(area)
+
+    if not selected:
+        # Ensure every paper gets at least one area.
+        selected = ["iot-interoperability"] if entry_type == "article" else ["autonomous-robotic-iot"]
+
+    seen: set[str] = set()
+    ordered = [a for a in selected if not (a in seen or seen.add(a))]
+    return "|".join(ordered)
+
+
 def map_author(name: str, aliases: dict[str, str]) -> str:
     canonical = canonical_person(bib_text_cleanup(name))
     key = norm_ascii(canonical)
@@ -307,6 +481,7 @@ def convert_entry(
     pub_type = ENTRY_TYPE_MAP.get(entry_type, "other")
     doi = normalize_doi(fields.get("doi", ""))
     url = clean_ws(fields.get("url", ""))
+    abstract = clean_ws(fields.get("abstract", ""))
 
     row_id = f"{year}-{slugify(title, 40)}"
     if row_id.endswith("-"):
@@ -323,7 +498,7 @@ def convert_entry(
         "type": pub_type,
         "doi": doi,
         "url": url,
-        "research_areas": "",
+        "research_areas": classify_research_areas(title, abstract, venue, entry_type),
         "featured": "0",
     }
 
@@ -338,6 +513,11 @@ def main() -> int:
     parser.add_argument("--bib", type=Path, default=BIB_PATH, help="path to BibTeX input")
     parser.add_argument("--csv", type=Path, default=CSV_PATH, help="path to CSV output")
     parser.add_argument("--dry-run", action="store_true", help="do not write output")
+    parser.add_argument(
+        "--force-research-areas",
+        action="store_true",
+        help="overwrite existing research_areas in CSV with automatic inference",
+    )
     args = parser.parse_args()
 
     bib_text = args.bib.read_text(encoding="utf-8")
@@ -362,7 +542,9 @@ def main() -> int:
         if prev:
             if prev.get("id"):
                 row["id"] = prev["id"]
-            row["research_areas"] = prev.get("research_areas", "") or ""
+            # Preserve manual curation when present.
+            if (not args.force_research_areas) and prev.get("research_areas", "").strip():
+                row["research_areas"] = prev["research_areas"].strip()
             row["featured"] = prev.get("featured", "0") or "0"
             if not row["venue"] and prev.get("venue"):
                 row["venue"] = prev["venue"]
